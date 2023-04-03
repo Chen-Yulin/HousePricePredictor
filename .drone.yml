@@ -1,0 +1,22 @@
+
+kind: pipeline
+type: ssh
+name: default
+server:
+  host:
+    from_secret: host
+  user:
+    from_secret: username
+  ssh_key:
+    from_secret: ssh_key
+  port: 4710
+steps:
+- name: pre-checks
+  commands:
+  - pwd
+  - whoami
+  - ls
+- name: model_evaluation
+  commands:
+  - eval_model $(whoami) $(pwd)
+
