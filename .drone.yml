@@ -18,5 +18,5 @@ steps:
   - ls
 - name: model_evaluation
   commands:
-  - eval_model $(whoami) $(pwd)
+  - sudo -u ta eval_model $(whoami) $(pwd)
 
