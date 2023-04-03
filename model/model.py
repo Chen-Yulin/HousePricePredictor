@@ -7,7 +7,7 @@ class Model():
 	def __init__(self, dir_name: str) -> None:
 		'''
 		'dir_name' is the path to your model file on the server, i.e,
-		~/proj-4710/
+		~/
 		The runner will create an instance of the class with path specified.
 		'''
 		self.dir = dir_name
