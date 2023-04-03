@@ -1,20 +1,8 @@
-__pycache__/
-*.py[cod]
-*$py.class
-*.xz
-*.gz
-*.zip
-*.bz2
-*.rar
-*.tar
-*.7z
-*.dmg
-*.jar
-*.iso
-.DS_Store
-*.csv
-.ipynb_checkpoints
-.idea
+######################################################
+## Add your own gitignore files here ##
+
+#PDF
+*.pdf 
 
 # Windows thumbnail cache files
 Thumbs.db
@@ -40,3 +28,21 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+__pycache__/
+*.py[cod]
+*$py.class
+*.xz
+*.gz
+*.zip
+*.bz2
+*.rar
+*.tar
+*.7z
+*.dmg
+*.jar
+*.iso
+.DS_Store
+*.csv
+.ipynb_checkpoints
+.idea
