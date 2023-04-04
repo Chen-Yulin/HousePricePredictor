@@ -16,7 +16,15 @@ steps:
   - pwd
   - whoami
   - ls
+- name: create_tmp
+  commands:
+  - rm -rf /home/$(whoami)/tmp
+  - mkdir /home/$(whoami)/tmp
+  - cp -r . /home/$(whoami)/tmp
 - name: model_evaluation
   commands:
-  - sudo -u ta eval_model $(whoami) $(pwd)
+  - sudo -u ta eval_model $(whoami)
+- name: delete_tmp
+  commands:
+  - rm -rf /home/$(whoami)/tmp
 
