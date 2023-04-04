@@ -12,7 +12,7 @@ class Model():
 		'''
 		self.dir = dir_name
 
-	def myPredict(self, data: pd.Dataframe) -> np.ndarray:
+	def myPredict(self, data: pd.DataFrame) -> np.ndarray:
 		'''
 		This is the only method that is called by the runner.
 		'data' is the pandas Dataframe for the test set.
@@ -26,7 +26,7 @@ class Model():
 		m = load(os.path.join(self.dir, 'your_model_file'))
 		...
 		
-	def preprocess(self, data: pd.Dataframe) -> pd.Dataframe:
+	def preprocess(self, data: pd.DataFrame) -> pd.DataFrame:
 		'''
 		This method is for preprocessing. 
 		This method is not mandatory for the runner,
