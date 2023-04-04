@@ -9,6 +9,7 @@ class Model():
 		'dir_name' is the path to your model file on the server, i.e,
 		~/
 		The runner will create an instance of the class with path specified.
+		Do NOT modify this method.
 		'''
 		self.dir = dir_name
 
@@ -19,24 +20,10 @@ class Model():
 		It has the same structure as the training data,
 		except that it doesn't have the 'Sale Price' column.
 		'''
-		## Some feature engineering and pre-prossing ##
+		## Pre-prossing, if necessary 
 		...
-		## Load your model ##
-		## Remember to prepend your model file with the path ##
+		## Load your model 
+		## Remember to prepend your model file with the path 
+		## The following code is just an example, feel free to modify 
 		m = load(os.path.join(self.dir, 'your_model_file'))
-		...
-		
-	def preprocess(self, data: pd.DataFrame) -> pd.DataFrame:
-		'''
-		This method is for preprocessing. 
-		This method is not mandatory for the runner,
-		it's for your convinience. 
-		'''
-		## Do your feature engineering and preprocessing ##
-		...
-	
-
-	## Define your own methods here (inside this class), as you wish ##
-
-	
-	
+		return m.predict(data)
