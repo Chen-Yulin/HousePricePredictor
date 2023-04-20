@@ -123,7 +123,6 @@ def create_pipeline():
     #])
     ct = ColumnTransformer([
         ("log_num", FunctionTransformer(np.log), ["Building Square Feet"]),
-        ('linear_num', "passthrough",["Bedrooms",'in_expensive_neighborhood']),
         ('roof_cat', OneHotEncoder(handle_unknown="ignore", sparse=False),["Roof Material"])
     ])
     pipeline = Pipeline([
