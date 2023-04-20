@@ -138,7 +138,7 @@ class Model():
         except that it doesn't have the 'Sale Price' column.
         '''
         ## Pre-prossing, if necessary 
-        data = preprocess_test(data)
+        data = self.preprocess_test(data)
         ## Load your model 
         ## Remember to prepend your model file with the path 
         ## The following code is just an example, feel free to modify 
