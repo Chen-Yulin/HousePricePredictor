@@ -120,7 +120,7 @@ def ohe_roof_material(data):
 
 
 # +
-def process_data_gm(data, pipeline_functions, prediction_col):
+def process_data_gm(data, pipeline_functions, prediction_col, test=False):
     """Process the data for a guided model."""
     for function, arguments, keyword_arguments in pipeline_functions:
         if keyword_arguments and (not arguments):
@@ -129,9 +129,13 @@ def process_data_gm(data, pipeline_functions, prediction_col):
             data = data.pipe(function, *arguments)
         else:
             data = data.pipe(function)
-    X = data.drop(columns=[prediction_col]).to_numpy()
-    y = data.loc[:, prediction_col].to_numpy()
-    return X, y
+    if test:
+        X = data.to_numpy()
+        return X
+    else:
+        X = data.drop(columns=[prediction_col]).to_numpy()
+        y = data.loc[:, prediction_col].to_numpy()
+        return X, y
 
 def select_columns(data, *columns):
     """Select only columns passed as arguments."""
@@ -167,6 +171,15 @@ def preprocess_train(data):
         (select_columns, ['Log Sale Price', 'Bedrooms', 'Log Building Square Feet'], None)
     ]
     return process_data_gm(data, pl, 'Log Sale Price')
+
+
+def preprocess_test(data):
+    pl = [
+        (Log_Trans, ["Building Square Feet"], None),
+        (add_total_bedrooms, None, None),
+        (select_columns, ['Log Sale Price', 'Bedrooms', 'Log Building Square Feet'], None)
+    ]
+    return process_data_gm(data, pl, 'Log Sale Price', test=False)
 
 
 def create_pipeline():

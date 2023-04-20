@@ -4,7 +4,7 @@ import pandas as pd
 import os
 import sys
 sys.path.append('../Project -part 2/project-p2-train')
-import proj as myProj
+from proj import *
 
 class Model():
 	def __init__(self, dir_name: str) -> None:
@@ -24,11 +24,13 @@ class Model():
 		except that it doesn't have the 'Sale Price' column.
 		'''
 		## Pre-prossing, if necessary 
-		
+		data = preprocess_test(data)
 		## Load your model 
 		## Remember to prepend your model file with the path 
 		## The following code is just an example, feel free to modify 
-		m = load(os.path.join(self.dir, 'your_model_file'))
+		m = load(os.path.join(self.dir, 'pipeline.joblib.gz'))
 		return m.predict(data)
+
+
 
 
