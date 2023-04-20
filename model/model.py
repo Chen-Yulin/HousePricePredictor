@@ -4,12 +4,6 @@ import pandas as pd
 import os
 import re
 
-from sklearn.linear_model import LinearRegression
-from sklearn.preprocessing import FunctionTransformer
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.pipeline import Pipeline
-from sklearn.compose import ColumnTransformer
-from sklearn.base import BaseEstimator, TransformerMixin
 
 
 class Model():
@@ -21,47 +15,7 @@ class Model():
         Do NOT modify this method.
         '''
         self.dir = dir_name
-    # some helper function for preprocess
-
-
-    def Log_Trans(self,data,col):
-        data["Log "+col] = np.log(data[col])
-        return data
-    
-    def extract_Room(self,description):
-        match = re.search(r'(\d+)(?=\s+of which are bedrooms)',description)
-        if match:
-            return int(match.group(1))
-        else:
-            return 0
-
-    def add_total_bedrooms(self,data):
-        """
-        Input:
-          data (data frame): a data frame containing at least the Description column.
-        """
-        with_rooms = data.copy()
-        with_rooms['Bedrooms'] = with_rooms['Description'].apply(self.extract_Room)
-        return with_rooms
-    
-    def find_expensive_neighborhoods(self,data, n=3, metric=np.median):
-        """
-        Input:
-          data (data frame): should contain at least a string-valued Neighborhood
-            and a numeric 'Sale Price' column
-          n (int): the number of top values desired
-          metric (function): function used for aggregating the data in each neighborhood.
-            for example, np.median for median prices
-
-        Output:
-          a list of the top n richest neighborhoods as measured by the metric function
-        """
-        neighborhoods = data.groupby('Neighborhood Code')['Log Sale Price'].agg(metric).sort_values(ascending=False).head(n).index
-
-        # This makes sure the final list contains the generic int type used in Python3, not specific ones used in numpy.
-        return [int(code) for code in neighborhoods]
-    
-    def add_in_expensive_neighborhood(self,data, neighborhoods):
+    def add_in_expensive_neighborhood(self, data, neighborhoods):
         """
         Input:
           data (data frame): a data frame containing a 'Neighborhood Code' column with values
@@ -75,7 +29,6 @@ class Model():
 
         data['in_expensive_neighborhood'] = data["Neighborhood Code"].isin(neighborhoods).astype("int64")
         return data
-    
     def substitute_roof_material(self,data):
         """
         Input:
@@ -91,51 +44,27 @@ class Model():
                    5.0:'Tile',
                    6.0:'Other'}
         return data.replace({'Roof Material':mapping})
-    
-    def ohe_roof_material(self,data):
-        """
-        One-hot-encodes roof material.  New columns are of the form 0x_QUALITY.
-        """
-        #print(data[['Roof Material']])
-        encoder = OneHotEncoder(handle_unknown="ignore", sparse=False)
-        encoded = encoder.fit_transform(data[['Roof Material']])
-        new_name = ['rfm_'+cat for cat in encoder.categories_[0]]
-        ohe_df = pd.DataFrame(encoded,columns=new_name)
-        #print(encoded)
-        if new_name[0] in data.columns:
-            data = data.drop(new_name,axis=1)
-        data = pd.concat([data,ohe_df],axis=1)
-        return data
-    
-    def process_data_gm(self,data, pipeline_functions, prediction_col, test=False):
-        """Process the data for a guided model."""
-        for function, arguments, keyword_arguments in pipeline_functions:
-            if keyword_arguments and (not arguments):
-                data = data.pipe(function, **keyword_arguments)
-            elif (not keyword_arguments) and (arguments):
-                data = data.pipe(function, *arguments)
-            else:
-                data = data.pipe(function)
-        if test:
-            X = data.to_numpy()
-            return X
+    def extract_Room(self,description):
+        match = re.search(r'(\d+)(?=\s+of which are bedrooms)',description)
+        if match:
+            return int(match.group(1))
         else:
-            X = data.drop(columns=[prediction_col]).to_numpy()
-            y = data.loc[:, prediction_col].to_numpy()
-            return X, y
+            return 0
 
-    def select_columns(self,data, *columns):
-        """Select only columns passed as arguments."""
-        return data.loc[:, columns]
-
-
-    def preprocess_test(self,data):
-        pl = [
-            (self.Log_Trans, ["Building Square Feet"], None),
-            (self.add_total_bedrooms, None, None),
-            (self.select_columns, ['Bedrooms', 'Log Building Square Feet'], None)
-        ]
-        return self.process_data_gm(data, pl, 'Log Sale Price', test=True)
+    def add_total_bedrooms(self,data):
+        """
+        Input:
+          data (data frame): a data frame containing at least the Description column.
+        """
+        with_rooms = data.copy()
+        with_rooms['Bedrooms'] = with_rooms['Description'].apply(self.extract_Room)
+        return with_rooms
+    def Preprocess(self,X):
+        X = X[["Building Square Feet", "Description", 'Neighborhood Code',"Roof Material"]]
+        X = self.add_in_expensive_neighborhood(X,[44, 93, 94])
+        X = self.add_total_bedrooms(X)
+        X = self.substitute_roof_material(X)
+        return X
     def myPredict(self, data: pd.DataFrame) -> np.ndarray:
         '''
         This is the only method that is called by the runner.
@@ -144,7 +73,7 @@ class Model():
         except that it doesn't have the 'Sale Price' column.
         '''
         ## Pre-prossing, if necessary 
-        data = self.preprocess_test(data)
+        data = self.Preprocess(data)
         ## Load your model 
         ## Remember to prepend your model file with the path 
         ## The following code is just an example, feel free to modify 
