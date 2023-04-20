@@ -158,13 +158,23 @@ class ComposedTransformer(BaseEstimator,TransformerMixin):
         return process_data_gm()
 
 
+def preprocess_train(data):
+    pl = [
+        (remove_outliers, ["Sale Price",499], None),
+        (Log_Trans, ["Sale Price"], None),
+        (Log_Trans, ["Building Square Feet"], None),
+        (add_total_bedrooms, None, None),
+        (select_columns, ['Log Sale Price', 'Bedrooms', 'Log Building Square Feet'], None)
+    ]
+    return process_data_gm(data, pl, 'Log Sale Price')
+
 
 def create_pipeline():
     """Create a machine learning pipeline"""
     
     # Define the pipeline
     pipeline = Pipeline([
-        
+        ("lr",LinearRegression())
     ])
     
     return pipeline
