@@ -133,7 +133,7 @@ class Model():
         pl = [
             (self.Log_Trans, ["Building Square Feet"], None),
             (self.add_total_bedrooms, None, None),
-            (self.select_columns, ['Log Sale Price', 'Bedrooms', 'Log Building Square Feet'], None)
+            (self.select_columns, ['Bedrooms', 'Log Building Square Feet'], None)
         ]
         return self.process_data_gm(data, pl, 'Log Sale Price', test=True)
     def myPredict(self, data: pd.DataFrame) -> np.ndarray:
