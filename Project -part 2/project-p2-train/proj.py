@@ -179,7 +179,7 @@ def preprocess_test(data):
         (add_total_bedrooms, None, None),
         (select_columns, ['Log Sale Price', 'Bedrooms', 'Log Building Square Feet'], None)
     ]
-    return process_data_gm(data, pl, 'Log Sale Price', test=False)
+    return process_data_gm(data, pl, 'Log Sale Price', test=True)
 
 
 def create_pipeline():
