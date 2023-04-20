@@ -107,12 +107,10 @@ def ohe_roof_material(data):
 
 def Preprocess(data):
     X = data.copy()
-    X = X[["Building Square Feet", "Description", 'Neighborhood Code',"Roof Material"]]
     X = add_in_expensive_neighborhood(X,[44, 93, 94])
     X = add_total_bedrooms(X)
     X = substitute_roof_material(X)
-    X.drop(columns=['Description','Neighborhood Code'])
-    X = X[["Bedrooms","Building Square Feet"]]
+    X = X[["Bedrooms","Building Square Feet","Age Decade"]]
     #print(X)
     return X
 
@@ -125,7 +123,7 @@ def create_pipeline():
     #    ("lr",LinearRegression())
     #])
     ct = ColumnTransformer([
-        ('linear_num', "passthrough",["Bedrooms"]),
+        ('linear_num', "passthrough",["Bedrooms","Age Decade"]),
         ('log_num', FunctionTransformer(np.log), ["Building Square Feet"])
     ])
     pipeline = Pipeline([

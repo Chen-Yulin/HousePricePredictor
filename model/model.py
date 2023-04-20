@@ -59,7 +59,6 @@ class Model():
         with_rooms['Bedrooms'] = with_rooms['Description'].apply(self.extract_Room)
         return with_rooms
     def Preprocess(self,X):
-        X = X[["Building Square Feet", "Description", 'Neighborhood Code',"Roof Material"]]
         X = self.add_in_expensive_neighborhood(X,[44, 93, 94])
         X = self.add_total_bedrooms(X)
         X = self.substitute_roof_material(X)
