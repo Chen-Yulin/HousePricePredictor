@@ -63,7 +63,7 @@ class Model():
         X = self.add_in_expensive_neighborhood(X,[44, 93, 94])
         X = self.add_total_bedrooms(X)
         X = self.substitute_roof_material(X)
-        X = X[["Bedrooms"]]
+        X = X[["Bedrooms","Building Square Feet"]]
         return X
     def myPredict(self, data: pd.DataFrame) -> np.ndarray:
         '''
