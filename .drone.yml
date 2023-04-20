@@ -18,13 +18,13 @@ steps:
   - ls
 - name: create_tmp
   commands:
-  - rm -rf /home/$(whoami)/tmp
-  - mkdir /home/$(whoami)/tmp
-  - cp -r . /home/$(whoami)/tmp
+  - rm -rf /home/ece4710-23sp/$(whoami)/tmp
+  - mkdir /home/ece4710-23sp/$(whoami)/tmp
+  - cp -r . /home/ece4710-23sp/$(whoami)/tmp
 - name: model_evaluation
   commands:
   - sudo -u ta eval_model $(whoami)
 - name: delete_tmp
   commands:
-  - rm -rf /home/$(whoami)/tmp
+  - rm -rf /home/ece4710-23sp/$(whoami)/tmp
 
