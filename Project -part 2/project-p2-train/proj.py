@@ -112,7 +112,7 @@ def Preprocess(data):
     X = add_total_bedrooms(X)
     X = substitute_roof_material(X)
     X.drop(columns=['Description','Neighborhood Code'])
-    X = X[["Bedrooms"]]
+    X = X[["Bedrooms","Building Square Feet"]]
     #print(X)
     return X
 
@@ -125,7 +125,8 @@ def create_pipeline():
     #    ("lr",LinearRegression())
     #])
     ct = ColumnTransformer([
-        ('linear_num', "passthrough",["Bedrooms"])
+        ('linear_num', "passthrough",["Bedrooms"]),
+        ('log_num', FunctionTransformer(np.log), ["Building Square Feet"])
     ])
     pipeline = Pipeline([
         ("columnTrans",ct),
