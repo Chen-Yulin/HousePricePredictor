@@ -27,14 +27,14 @@ class Model():
     def Log_Trans(self,data,col):
         data["Log "+col] = np.log(data[col])
         return data
-    def extract_Room(description):
+    def extract_Room(self,description):
         match = re.search(r'(\d+)(?=\s+of which are bedrooms)',description)
         if match:
             return int(match.group(1))
         else:
             return 0
 
-    def add_total_bedrooms(data):
+    def add_total_bedrooms(self,data):
         """
         Input:
           data (data frame): a data frame containing at least the Description column.
@@ -42,7 +42,7 @@ class Model():
         with_rooms = data.copy()
         with_rooms['Bedrooms'] = with_rooms['Description'].apply(extract_Room)
         return with_rooms
-    def find_expensive_neighborhoods(data, n=3, metric=np.median):
+    def find_expensive_neighborhoods(self,data, n=3, metric=np.median):
         """
         Input:
           data (data frame): should contain at least a string-valued Neighborhood
@@ -58,7 +58,7 @@ class Model():
 
         # This makes sure the final list contains the generic int type used in Python3, not specific ones used in numpy.
         return [int(code) for code in neighborhoods]
-    def add_in_expensive_neighborhood(data, neighborhoods):
+    def add_in_expensive_neighborhood(self,data, neighborhoods):
         """
         Input:
           data (data frame): a data frame containing a 'Neighborhood Code' column with values
@@ -72,7 +72,7 @@ class Model():
 
         data['in_expensive_neighborhood'] = data["Neighborhood Code"].isin(neighborhoods).astype("int64")
         return data
-    def substitute_roof_material(data):
+    def substitute_roof_material(self,data):
         """
         Input:
           data (data frame): a data frame containing a 'Roof Material' column.  Its values
@@ -87,7 +87,7 @@ class Model():
                    5.0:'Tile',
                    6.0:'Other'}
         return data.replace({'Roof Material':mapping})
-    def ohe_roof_material(data):
+    def ohe_roof_material(self,data):
         """
         One-hot-encodes roof material.  New columns are of the form 0x_QUALITY.
         """
@@ -118,7 +118,7 @@ class Model():
             y = data.loc[:, prediction_col].to_numpy()
             return X, y
 
-    def select_columns(data, *columns):
+    def select_columns(self,data, *columns):
         """Select only columns passed as arguments."""
         return data.loc[:, columns]
 
