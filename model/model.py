@@ -125,11 +125,11 @@ class Model():
 
     def preprocess_test(self,data):
         pl = [
-            (Log_Trans, ["Building Square Feet"], None),
-            (add_total_bedrooms, None, None),
-            (select_columns, ['Log Sale Price', 'Bedrooms', 'Log Building Square Feet'], None)
+            (self.Log_Trans, ["Building Square Feet"], None),
+            (self.add_total_bedrooms, None, None),
+            (self.select_columns, ['Log Sale Price', 'Bedrooms', 'Log Building Square Feet'], None)
         ]
-        return process_data_gm(data, pl, 'Log Sale Price', test=True)
+        return self.process_data_gm(data, pl, 'Log Sale Price', test=True)
     def myPredict(self, data: pd.DataFrame) -> np.ndarray:
         '''
         This is the only method that is called by the runner.
