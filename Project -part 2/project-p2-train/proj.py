@@ -7,6 +7,7 @@ import os
 import plotly.express as px
 import re
 
+
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import FunctionTransformer
 from sklearn.preprocessing import OneHotEncoder
@@ -14,6 +15,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.pipeline import FeatureUnion
+from sklearn import ensemble
 
 
 def remove_outliers(data, variable, degree = 5):
@@ -127,7 +129,7 @@ def create_pipeline():
     ])
     pipeline = Pipeline([
         ("columnTrans",ct),
-        ("lin-reg",LinearRegression(fit_intercept=True))
+        ("lin-reg",ensemble.RandomForestRegressor(n_estimators=10))
     ])
     
     return pipeline
