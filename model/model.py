@@ -5,7 +5,6 @@ import os
 import re
 
 
-
 class Model():
     def __init__(self, dir_name: str) -> None:
         '''
@@ -64,6 +63,7 @@ class Model():
         X = self.add_in_expensive_neighborhood(X,[44, 93, 94])
         X = self.add_total_bedrooms(X)
         X = self.substitute_roof_material(X)
+        X = X[["Bedrooms"]]
         return X
     def myPredict(self, data: pd.DataFrame) -> np.ndarray:
         '''
