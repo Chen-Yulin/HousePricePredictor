@@ -101,7 +101,7 @@ class Model():
             data = data.drop(new_name,axis=1)
         data = pd.concat([data,ohe_df],axis=1)
         return data
-    def process_data_gm(data, pipeline_functions, prediction_col, test=False):
+    def process_data_gm(self,data, pipeline_functions, prediction_col, test=False):
         """Process the data for a guided model."""
         for function, arguments, keyword_arguments in pipeline_functions:
             if keyword_arguments and (not arguments):
@@ -123,7 +123,7 @@ class Model():
         return data.loc[:, columns]
 
 
-    def preprocess_test(data):
+    def preprocess_test(self,data):
         pl = [
             (Log_Trans, ["Building Square Feet"], None),
             (add_total_bedrooms, None, None),
