@@ -110,7 +110,8 @@ def Preprocess(data):
     X = add_in_expensive_neighborhood(X,[44, 93, 94])
     X = add_total_bedrooms(X)
     X = substitute_roof_material(X)
-    X = X[["Bedrooms","Building Square Feet","Age Decade","Garage Indicator","Floodplain","Road Proximity","Sale Year","Repair Condition"]]
+    X = X[["Bedrooms","Building Square Feet","Age Decade","Garage Indicator","Floodplain",
+           "Road Proximity","Sale Year","Repair Condition","Estimate (Building)","Estimate (Land)"]]
     #print(X)
     return X
 
@@ -119,7 +120,9 @@ def create_pipeline():
     """Create a machine learning pipeline"""
 
     ct = ColumnTransformer([
-        ('linear_num', "passthrough",["Bedrooms","Age Decade","Garage Indicator","Floodplain","Road Proximity","Sale Year","Repair Condition"]),
+        ('linear_num', "passthrough",["Bedrooms","Age Decade","Garage Indicator","Floodplain",
+                                      "Road Proximity","Sale Year","Repair Condition",
+                                      "Estimate (Building)","Estimate (Land)"]),
         ('log_num', FunctionTransformer(np.log), ["Building Square Feet"])
     ])
     pipeline = Pipeline([
