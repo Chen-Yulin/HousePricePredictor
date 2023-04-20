@@ -191,10 +191,3 @@ def create_pipeline():
     ])
     
     return pipeline
-
-    
-
-
-
-
-
