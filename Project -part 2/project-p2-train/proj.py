@@ -128,7 +128,7 @@ def create_pipeline():
     ])
     pipeline = Pipeline([
         ("columnTrans",ct),
-        ("lin-reg",LinearRegression(fit_intercept=True))
+        ("lin-reg",LinearRegression(fit_intercept=False))
     ])
     
     return pipeline
