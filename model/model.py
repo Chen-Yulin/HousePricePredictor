@@ -24,7 +24,7 @@ class Model():
     # some helper function for preprocess
 
 
-    def Log_Trans(data,col):
+    def Log_Trans(self,data,col):
         data["Log "+col] = np.log(data[col])
         return data
     def extract_Room(description):
