@@ -105,7 +105,8 @@ def ohe_roof_material(data):
     return data
 
 
-def Preprocess(X):
+def Preprocess(data):
+    X = data.copy()
     X = X[["Building Square Feet", "Description", 'Neighborhood Code',"Roof Material"]]
     X = add_in_expensive_neighborhood(X,[44, 93, 94])
     X = add_total_bedrooms(X)
@@ -128,7 +129,7 @@ def create_pipeline():
     ])
     pipeline = Pipeline([
         ("columnTrans",ct),
-        ("lin-reg",LinearRegression(fit_intercept=False))
+        ("lin-reg",LinearRegression(fit_intercept=True))
     ])
     
     return pipeline
