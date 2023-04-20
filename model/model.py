@@ -2,7 +2,6 @@ from joblib import load
 import numpy as np
 import pandas as pd 
 import os
-import plotly.express as px
 import re
 
 from sklearn.linear_model import LinearRegression
@@ -148,38 +147,5 @@ class Model():
             (select_columns, ['Log Sale Price', 'Bedrooms', 'Log Building Square Feet'], None)
         ]
         return process_data_gm(data, pl, 'Log Sale Price', test=False)
-
-
-# +
-def process_data_gm(data, pipeline_functions, prediction_col, test=False):
-    """Process the data for a guided model."""
-    for function, arguments, keyword_arguments in pipeline_functions:
-        if keyword_arguments and (not arguments):
-            data = data.pipe(function, **keyword_arguments)
-        elif (not keyword_arguments) and (arguments):
-            data = data.pipe(function, *arguments)
-        else:
-            data = data.pipe(function)
-    if test:
-        X = data.to_numpy()
-        return X
-    else:
-        X = data.drop(columns=[prediction_col]).to_numpy()
-        y = data.loc[:, prediction_col].to_numpy()
-        return X, y
-
-def select_columns(data, *columns):
-    """Select only columns passed as arguments."""
-    return data.loc[:, columns]
-
-
-def preprocess_test(data):
-    pl = [
-        (Log_Trans, ["Building Square Feet"], None),
-        (add_total_bedrooms, None, None),
-        (select_columns, ['Log Sale Price', 'Bedrooms', 'Log Building Square Feet'], None)
-    ]
-    return process_data_gm(data, pl, 'Log Sale Price', test=False)
-
 
 
