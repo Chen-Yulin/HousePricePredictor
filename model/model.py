@@ -27,6 +27,7 @@ class Model():
     def Log_Trans(self,data,col):
         data["Log "+col] = np.log(data[col])
         return data
+    
     def extract_Room(self,description):
         match = re.search(r'(\d+)(?=\s+of which are bedrooms)',description)
         if match:
@@ -40,8 +41,9 @@ class Model():
           data (data frame): a data frame containing at least the Description column.
         """
         with_rooms = data.copy()
-        with_rooms['Bedrooms'] = with_rooms['Description'].apply(extract_Room)
+        with_rooms['Bedrooms'] = with_rooms['Description'].apply(self.extract_Room)
         return with_rooms
+    
     def find_expensive_neighborhoods(self,data, n=3, metric=np.median):
         """
         Input:
@@ -58,6 +60,7 @@ class Model():
 
         # This makes sure the final list contains the generic int type used in Python3, not specific ones used in numpy.
         return [int(code) for code in neighborhoods]
+    
     def add_in_expensive_neighborhood(self,data, neighborhoods):
         """
         Input:
@@ -72,6 +75,7 @@ class Model():
 
         data['in_expensive_neighborhood'] = data["Neighborhood Code"].isin(neighborhoods).astype("int64")
         return data
+    
     def substitute_roof_material(self,data):
         """
         Input:
@@ -87,6 +91,7 @@ class Model():
                    5.0:'Tile',
                    6.0:'Other'}
         return data.replace({'Roof Material':mapping})
+    
     def ohe_roof_material(self,data):
         """
         One-hot-encodes roof material.  New columns are of the form 0x_QUALITY.
@@ -101,6 +106,7 @@ class Model():
             data = data.drop(new_name,axis=1)
         data = pd.concat([data,ohe_df],axis=1)
         return data
+    
     def process_data_gm(self,data, pipeline_functions, prediction_col, test=False):
         """Process the data for a guided model."""
         for function, arguments, keyword_arguments in pipeline_functions:
