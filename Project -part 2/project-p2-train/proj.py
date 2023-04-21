@@ -129,7 +129,7 @@ def create_pipeline():
     ])
     pipeline = Pipeline([
         ("columnTrans",ct),
-        ("lin-reg",ensemble.RandomForestRegressor(n_estimators=50,max_depth=15))
+        ("lin-reg",ensemble.RandomForestRegressor(n_estimators=50,max_depth=10))
     ])
     
     return pipeline
