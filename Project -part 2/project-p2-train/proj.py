@@ -113,7 +113,8 @@ def Preprocess(data):
     X = add_total_bedrooms(X)
     X = substitute_roof_material(X)
     X = X[["Bedrooms","Building Square Feet","Age Decade","Garage Indicator","Floodplain",
-           "Road Proximity","Sale Year","Repair Condition","Estimate (Building)","Estimate (Land)","Apartments","Wall Material"]]
+           "Road Proximity","Sale Year","Repair Condition","Estimate (Building)","Estimate (Land)",
+           "Apartments","Wall Material","Basement","Basement Finish"]]
     #print(X)
     return X
 
@@ -124,12 +125,13 @@ def create_pipeline():
     ct = ColumnTransformer([
         ('linear_num', "passthrough",["Bedrooms","Age Decade","Garage Indicator","Floodplain",
                                       "Road Proximity","Sale Year","Repair Condition",
-                                      "Estimate (Building)","Estimate (Land)","Apartments","Wall Material"]),
+                                      "Estimate (Building)","Estimate (Land)","Apartments","Wall Material",
+                                      "Basement","Basement Finish"]),
         ('log_num', FunctionTransformer(np.log), ["Building Square Feet"])
     ])
     pipeline = Pipeline([
         ("columnTrans",ct),
-        ("lin-reg",ensemble.RandomForestRegressor(n_estimators=50,max_depth=10))
+        ("lin-reg",ensemble.RandomForestRegressor(n_estimators=50,max_depth=20))
     ])
     
     return pipeline
