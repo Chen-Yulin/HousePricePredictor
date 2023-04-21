@@ -113,7 +113,7 @@ def Preprocess(data):
     X = add_total_bedrooms(X)
     X = substitute_roof_material(X)
     X = X[["Bedrooms","Building Square Feet","Age Decade","Garage Indicator","Floodplain",
-           "Road Proximity","Sale Year","Repair Condition","Estimate (Building)","Estimate (Land)"]]
+           "Road Proximity","Sale Year","Repair Condition","Estimate (Building)","Estimate (Land)","Apartments","Wall Material"]]
     #print(X)
     return X
 
@@ -124,7 +124,7 @@ def create_pipeline():
     ct = ColumnTransformer([
         ('linear_num', "passthrough",["Bedrooms","Age Decade","Garage Indicator","Floodplain",
                                       "Road Proximity","Sale Year","Repair Condition",
-                                      "Estimate (Building)","Estimate (Land)"]),
+                                      "Estimate (Building)","Estimate (Land)","Apartments","Wall Material"]),
         ('log_num', FunctionTransformer(np.log), ["Building Square Feet"])
     ])
     pipeline = Pipeline([
