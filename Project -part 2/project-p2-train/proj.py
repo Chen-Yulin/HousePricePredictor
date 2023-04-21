@@ -131,7 +131,7 @@ def create_pipeline():
     ])
     pipeline = Pipeline([
         ("columnTrans",ct),
-        ("lin-reg",ensemble.RandomForestRegressor(n_estimators=50,max_depth=20))
+        ("gbrt-reg",ensemble.GradientBoostingRegressor(n_estimators=50,max_depth=20,learning_rate=0.002,random_state=0))
     ])
     
     return pipeline
