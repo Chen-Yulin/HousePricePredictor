@@ -131,7 +131,7 @@ def create_pipeline():
     ])
     pipeline = Pipeline([
         ("columnTrans",ct),
-        ("gbrt-reg",ensemble.GradientBoostingRegressor(n_estimators=500, learning_rate=0.6))
+        ("gbrt-reg",ensemble.GradientBoostingRegressor(n_estimators=2000, learning_rate=0.3))
     ])
     
     return pipeline
