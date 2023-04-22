@@ -11,6 +11,7 @@ import re
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import FunctionTransformer
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.base import BaseEstimator, TransformerMixin
@@ -131,6 +132,7 @@ def create_pipeline():
     ])
     pipeline = Pipeline([
         ("columnTrans",ct),
+        ("std", StandardScaler()),
         ("gbrt-reg",ensemble.GradientBoostingRegressor(n_estimators=500, learning_rate=0.3))
     ])
     
