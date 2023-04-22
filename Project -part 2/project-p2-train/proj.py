@@ -17,6 +17,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.pipeline import FeatureUnion
 from sklearn import ensemble
+from sklearn.svm import SVR
 
 
 def remove_outliers(data, variable, degree = 5):
@@ -133,7 +134,7 @@ def create_pipeline():
     pipeline = Pipeline([
         ("columnTrans",ct),
         ("std", StandardScaler()),
-        ("gbrt-reg",ensemble.GradientBoostingRegressor(n_estimators=500, learning_rate=0.3))
+        ("svr",SVR())
     ])
     
     return pipeline
