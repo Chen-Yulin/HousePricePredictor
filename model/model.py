@@ -78,7 +78,7 @@ class Model():
         ## Load your model 
         ## Remember to prepend your model file with the path 
         ## The following code is just an example, feel free to modify 
-        m = load(os.path.join(self.dir, 'pipeline.joblib.gz'))
+        m = load(os.path.join(self.dir, 'm2.joblib.gz'))
         return np.exp(m.predict(data))
 
 
