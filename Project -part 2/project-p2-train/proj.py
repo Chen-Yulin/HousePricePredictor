@@ -11,6 +11,7 @@ import re
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import FunctionTransformer
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.base import BaseEstimator, TransformerMixin
@@ -131,7 +132,8 @@ def create_pipeline():
     ])
     pipeline = Pipeline([
         ("columnTrans",ct),
-        ("lin-reg",ensemble.RandomForestRegressor(n_estimators=50,max_depth=20))
+        ("std",StandardScaler()),
+        ("rf-reg",ensemble.RandomForestRegressor(n_estimators=50,max_depth=20))
     ])
     
     return pipeline
