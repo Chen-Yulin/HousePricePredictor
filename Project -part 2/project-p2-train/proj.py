@@ -124,11 +124,10 @@ def create_pipeline():
     """Create a machine learning pipeline"""
 
     ct = ColumnTransformer([
-        ('linear_num', "passthrough",["Bedrooms","Age Decade","Garage Indicator","Floodplain",
+        ('linear_num', "passthrough",["Building Square Feet","Bedrooms","Age Decade","Garage Indicator","Floodplain",
                                       "Road Proximity","Sale Year","Repair Condition",
                                       "Estimate (Building)","Estimate (Land)","Apartments","Wall Material",
-                                      "Basement","Basement Finish"]),
-        ('log_num', FunctionTransformer(np.log), ["Building Square Feet"])
+                                      "Basement","Basement Finish"])
     ])
     pipeline = Pipeline([
         ("columnTrans",ct),
