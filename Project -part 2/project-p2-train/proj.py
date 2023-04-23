@@ -136,9 +136,11 @@ def create_pipeline():
     ])
     pipeline = Pipeline([
         ("columnTrans",ct),
-        ("bag-reg",ensemble.BaggingRegressor(n_estimators=80))
+        ("bag-reg",ensemble.BaggingRegressor(n_estimators=40, bootstrap_features=True))
     ])
     
     return pipeline
+
+
 
 
