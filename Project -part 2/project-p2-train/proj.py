@@ -135,7 +135,7 @@ def create_pipeline():
     ])
     pipeline = Pipeline([
         ("columnTrans",ct),
-        ("mlp-reg",MLPRegressor(hidden_layer_sizes=(60,),learning_rate_init=0.0005,max_iter=5000))
+        ("ada-reg",ensemble.AdaBoostRegressor(random_state=0))
     ])
     
     return pipeline
