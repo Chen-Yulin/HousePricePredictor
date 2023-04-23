@@ -21,6 +21,7 @@ from sklearn.linear_model import LassoCV
 from sklearn.linear_model import RidgeCV
 from sklearn.neural_network import MLPRegressor
 from sklearn.gaussian_process import GaussianProcessRegressor
+from sklearn.neighbors import KNeighborsRegressor
 
 
 def remove_outliers(data, variable, degree = 5):
@@ -136,7 +137,7 @@ def create_pipeline():
     ])
     pipeline = Pipeline([
         ("columnTrans",ct),
-        ("bag-reg",ensemble.BaggingRegressor(n_estimators=40, bootstrap_features=True))
+        ("bag-reg",ensemble.BaggingRegressor(KNeighborsRegressor(), n_estimators=20, bootstrap_features=True))
     ])
     
     return pipeline
