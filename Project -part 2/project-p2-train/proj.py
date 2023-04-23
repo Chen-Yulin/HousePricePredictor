@@ -114,7 +114,8 @@ def Preprocess(data):
     X = substitute_roof_material(X)
     X = X[["Bedrooms","Building Square Feet","Age Decade","Garage Indicator","Floodplain",
            "Road Proximity","Sale Year","Repair Condition","Estimate (Building)","Estimate (Land)",
-           "Apartments","Wall Material","Basement","Basement Finish","Sale Month of Year","Pure Market Filter","Porch"]]
+           "Apartments","Wall Material","Basement","Basement Finish","Sale Month of Year","Pure Market Filter",
+           "Porch","Land Square Feet"]]
     #print(X)
     return X
 
@@ -124,7 +125,7 @@ def create_pipeline():
 
     ct = ColumnTransformer([
         ('linear_num', "passthrough",["Building Square Feet","Bedrooms","Age Decade","Sale Year","Repair Condition",
-                                      "Estimate (Building)","Estimate (Land)","Apartments"]),
+                                      "Estimate (Building)","Estimate (Land)","Apartments","Land Square Feet"]),
         ('ohe', OneHotEncoder(handle_unknown='ignore'), ["Garage Indicator","Floodplain","Road Proximity",
                                   "Wall Material","Basement","Basement Finish","Sale Month of Year",
                                   "Pure Market Filter","Porch"])
