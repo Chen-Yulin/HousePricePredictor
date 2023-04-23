@@ -132,7 +132,7 @@ def create_pipeline():
     pipeline = Pipeline([
         ("columnTrans",ct),
         ("std",StandardScaler()),
-        ("rf-reg",ensemble.RandomForestRegressor(n_estimators=500,max_depth=15))
+        ("rf-reg",ensemble.RandomForestRegressor(n_estimators=100,max_depth=15))
     ])
     
     return pipeline
