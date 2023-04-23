@@ -61,7 +61,7 @@ class Model():
     def Preprocess(self,X):
         X = self.add_in_expensive_neighborhood(X,[44, 93, 94])
         X = self.add_total_bedrooms(X)
-        X = self.substitute_roof_material(X)
+        #X = self.substitute_roof_material(X)
         X = X[["Bedrooms","Building Square Feet","Age Decade","Garage Indicator","Floodplain",
                "Road Proximity","Sale Year","Repair Condition","Estimate (Building)","Estimate (Land)",
                "Apartments","Wall Material","Basement","Basement Finish","Roof Material"]]
