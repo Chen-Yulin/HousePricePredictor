@@ -125,7 +125,7 @@ def create_pipeline():
     ct = ColumnTransformer([
         ('linear_num', "passthrough",["Bedrooms","Age Decade","Sale Year","Repair Condition",
                                       "Estimate (Building)","Estimate (Land)","Apartments"]),
-        ('ohe', OneHotEncoder(), ["Garage Indicator","Floodplain","Road Proximity",
+        ('ohe', OneHotEncoder(handle_unknown='ignore'), ["Garage Indicator","Floodplain","Road Proximity",
                                   "Wall Material","Basement","Basement Finish"]),
         ('log_num', FunctionTransformer(np.log), ["Building Square Feet"])
     ])
