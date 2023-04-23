@@ -130,8 +130,7 @@ def create_pipeline():
 
     ct = ColumnTransformer([
         ('linear', "passthrough",["Building Square Feet","Bedrooms","Age Decade","Sale Year","Repair Condition",
-                                      "Estimate (Building)","Estimate (Land)","Apartments"]),
-        ('ohe', OneHotEncoder(handle_unknown='ignore'), ["Garage Indicator","Floodplain","Road Proximity",
+                                      "Estimate (Building)","Estimate (Land)","Apartments","Garage Indicator","Floodplain","Road Proximity",
                                   "Wall Material","Basement","Basement Finish","Sale Month of Year",
                                   "Pure Market Filter","Porch"])
     ])
