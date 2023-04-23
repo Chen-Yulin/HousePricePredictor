@@ -123,7 +123,7 @@ def create_pipeline():
     """Create a machine learning pipeline"""
 
     ct = ColumnTransformer([
-        ('linear_num', "passthrough",["Building Square Feet","Bedrooms","Age Decade","Sale Year","Repair Condition",
+        ('log', FunctionTransformer(np.log1p),["Building Square Feet","Bedrooms","Age Decade","Sale Year","Repair Condition",
                                       "Estimate (Building)","Estimate (Land)","Apartments"]),
         ('ohe', OneHotEncoder(handle_unknown='ignore'), ["Garage Indicator","Floodplain","Road Proximity",
                                   "Wall Material","Basement","Basement Finish","Sale Month of Year",
@@ -131,7 +131,7 @@ def create_pipeline():
     ])
     pipeline = Pipeline([
         ("columnTrans",ct),
-        ("gbrt-reg",ensemble.GradientBoostingRegressor(n_estimators=500, learning_rate=0.3))
+        ("lin-reg",LinearRegression(fit_intercept=True))
     ])
     
     return pipeline
