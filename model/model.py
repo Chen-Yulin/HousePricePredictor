@@ -65,7 +65,7 @@ class Model():
         X = X[["Bedrooms","Building Square Feet","Age Decade","Garage Indicator","Floodplain",
                "Road Proximity","Sale Year","Repair Condition","Estimate (Building)","Estimate (Land)",
                "Apartments","Wall Material","Basement","Basement Finish","Sale Month of Year","Pure Market Filter",
-               "Porch"]]
+               "Porch","Land Square Feet"]]
         return X
     def myPredict(self, data: pd.DataFrame) -> np.ndarray:
         '''
