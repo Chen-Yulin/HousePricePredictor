@@ -137,7 +137,7 @@ def create_pipeline():
     ])
     pipeline = Pipeline([
         ("columnTrans",ct),
-        ("bag-reg",ensemble.BaggingRegressor(KNeighborsRegressor(), n_estimators=20, bootstrap_features=True))
+        ("knn-reg",KNeighborsRegressor())
     ])
     
     return pipeline
