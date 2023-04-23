@@ -64,7 +64,8 @@ class Model():
         X = self.substitute_roof_material(X)
         X = X[["Bedrooms","Building Square Feet","Age Decade","Garage Indicator","Floodplain",
                "Road Proximity","Sale Year","Repair Condition","Estimate (Building)","Estimate (Land)",
-               "Apartments","Wall Material","Basement","Basement Finish","Sale Month of Year"]]
+               "Apartments","Wall Material","Basement","Basement Finish","Sale Month of Year","Pure Market Filter",
+               "Porch"]]
         return X
     def myPredict(self, data: pd.DataFrame) -> np.ndarray:
         '''
