@@ -16,6 +16,10 @@ from sklearn.compose import ColumnTransformer
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.pipeline import FeatureUnion
 from sklearn import ensemble
+from sklearn.linear_model import Lasso
+from sklearn.linear_model import LassoCV
+from sklearn.linear_model import RidgeCV
+from sklearn.neural_network import MLPRegressor
 
 
 def remove_outliers(data, variable, degree = 5):
@@ -123,7 +127,7 @@ def create_pipeline():
     """Create a machine learning pipeline"""
 
     ct = ColumnTransformer([
-        ('log', FunctionTransformer(np.log1p),["Building Square Feet","Bedrooms","Age Decade","Sale Year","Repair Condition",
+        ('linear', "passthrough",["Building Square Feet","Bedrooms","Age Decade","Sale Year","Repair Condition",
                                       "Estimate (Building)","Estimate (Land)","Apartments"]),
         ('ohe', OneHotEncoder(handle_unknown='ignore'), ["Garage Indicator","Floodplain","Road Proximity",
                                   "Wall Material","Basement","Basement Finish","Sale Month of Year",
@@ -131,7 +135,7 @@ def create_pipeline():
     ])
     pipeline = Pipeline([
         ("columnTrans",ct),
-        ("lin-reg",LinearRegression(fit_intercept=True))
+        ("mlp-reg",MLPRegressor(hidden_layer_sizes=(60,)))
     ])
     
     return pipeline
