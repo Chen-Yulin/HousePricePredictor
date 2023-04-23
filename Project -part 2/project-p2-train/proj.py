@@ -115,7 +115,7 @@ def Preprocess(data):
     #X = substitute_roof_material(X)
     X = X[["Bedrooms","Building Square Feet","Age Decade","Garage Indicator","Floodplain",
            "Road Proximity","Sale Year","Repair Condition","Estimate (Building)","Estimate (Land)",
-           "Apartments","Wall Material","Basement","Basement Finish","Roof Material"]]
+           "Apartments","Wall Material","Basement","Basement Finish"]]
     #print(X)
     return X
 
@@ -127,7 +127,7 @@ def create_pipeline():
         ('linear_num', "passthrough",["Bedrooms","Age Decade","Garage Indicator","Floodplain",
                                       "Road Proximity","Sale Year","Repair Condition",
                                       "Estimate (Building)","Estimate (Land)","Apartments","Wall Material",
-                                      "Basement","Basement Finish","Roof Material"]),
+                                      "Basement","Basement Finish"]),
         ('log_num', FunctionTransformer(np.log), ["Building Square Feet"])
     ])
     pipeline = Pipeline([
