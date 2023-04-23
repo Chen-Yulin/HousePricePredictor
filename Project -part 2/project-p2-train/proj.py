@@ -135,7 +135,7 @@ def create_pipeline():
     ])
     pipeline = Pipeline([
         ("columnTrans",ct),
-        ("mlp-reg",MLPRegressor(hidden_layer_sizes=(60,)))
+        ("mlp-reg",MLPRegressor(hidden_layer_sizes=(60,),))
     ])
     
     return pipeline

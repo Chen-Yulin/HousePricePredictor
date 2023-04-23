@@ -80,6 +80,6 @@ class Model():
         ## Remember to prepend your model file with the path 
         ## The following code is just an example, feel free to modify 
         m = load(os.path.join(self.dir, 'm4.joblib.gz'))
-        return np.exp(m.predict(data))
+        return m.predict(data)
 
 
