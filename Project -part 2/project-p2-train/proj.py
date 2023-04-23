@@ -112,10 +112,10 @@ def Preprocess(data):
     X = data.copy()
     X = add_in_expensive_neighborhood(X,[44, 93, 94])
     X = add_total_bedrooms(X)
-    X = substitute_roof_material(X)
+    #X = substitute_roof_material(X)
     X = X[["Bedrooms","Building Square Feet","Age Decade","Garage Indicator","Floodplain",
            "Road Proximity","Sale Year","Repair Condition","Estimate (Building)","Estimate (Land)",
-           "Apartments","Wall Material","Basement","Basement Finish"]]
+           "Apartments","Wall Material","Basement","Basement Finish","Roof Material"]]
     #print(X)
     return X
 
@@ -127,7 +127,7 @@ def create_pipeline():
         ('linear_num', "passthrough",["Bedrooms","Age Decade","Garage Indicator","Floodplain",
                                       "Road Proximity","Sale Year","Repair Condition",
                                       "Estimate (Building)","Estimate (Land)","Apartments","Wall Material",
-                                      "Basement","Basement Finish"]),
+                                      "Basement","Basement Finish","Roof Material"]),
         ('log_num', FunctionTransformer(np.log), ["Building Square Feet"])
     ])
     pipeline = Pipeline([
