@@ -115,7 +115,7 @@ def Preprocess(data):
     X = X[["Bedrooms","Building Square Feet","Age Decade","Garage Indicator","Floodplain",
            "Road Proximity","Sale Year","Repair Condition","Estimate (Building)","Estimate (Land)",
            "Apartments","Wall Material","Basement","Basement Finish","Sale Month of Year","Pure Market Filter",
-           "Porch","Land Square Feet"]]
+           "Porch","Land Square Feet","Property Class"]]
     #print(X)
     return X
 
@@ -128,7 +128,7 @@ def create_pipeline():
                                       "Estimate (Building)","Estimate (Land)","Apartments","Land Square Feet"]),
         ('ohe', OneHotEncoder(handle_unknown='ignore'), ["Garage Indicator","Floodplain","Road Proximity",
                                   "Wall Material","Basement","Basement Finish","Sale Month of Year",
-                                  "Pure Market Filter","Porch"])
+                                  "Pure Market Filter","Porch","Property Class"])
     ])
     pipeline = Pipeline([
         ("columnTrans",ct),
