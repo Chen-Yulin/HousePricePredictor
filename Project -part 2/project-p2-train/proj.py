@@ -123,10 +123,10 @@ def create_pipeline():
     """Create a machine learning pipeline"""
 
     ct = ColumnTransformer([
-        ('linear_num', "passthrough",["Bedrooms","Age Decade","Garage Indicator","Floodplain",
-                                      "Road Proximity","Sale Year","Repair Condition",
-                                      "Estimate (Building)","Estimate (Land)","Apartments","Wall Material",
-                                      "Basement","Basement Finish"]),
+        ('linear_num', "passthrough",["Bedrooms","Age Decade","Sale Year","Repair Condition",
+                                      "Estimate (Building)","Estimate (Land)","Apartments"]),
+        ('ohe', OneHotEncoder(), ["Garage Indicator","Floodplain","Road Proximity",
+                                  "Wall Material","Basement","Basement Finish"]),
         ('log_num', FunctionTransformer(np.log), ["Building Square Feet"])
     ])
     pipeline = Pipeline([
