@@ -20,6 +20,7 @@ from sklearn.linear_model import Lasso
 from sklearn.linear_model import LassoCV
 from sklearn.linear_model import RidgeCV
 from sklearn.neural_network import MLPRegressor
+from sklearn.gaussian_process import GaussianProcessRegressor
 
 
 def remove_outliers(data, variable, degree = 5):
@@ -135,7 +136,7 @@ def create_pipeline():
     ])
     pipeline = Pipeline([
         ("columnTrans",ct),
-        ("ada-reg",ensemble.AdaBoostRegressor(random_state=0))
+        ("bag-reg",ensemble.BaggingRegressor())
     ])
     
     return pipeline
