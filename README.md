@@ -8,6 +8,7 @@
   - [Pipeline](#pipeline)
     - [ColumnTransformer](#columntransformer)
     - [RandomForestRegressor](#randomforestregressor)
+  - [Preprocessing on the training data](#preprocessing-on-the-training-data)
 <!--toc:end-->
 
 ## Feature Engineering
