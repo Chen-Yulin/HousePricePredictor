@@ -10,8 +10,6 @@
     - [RandomForestRegressor](#randomforestregressor)
 <!--toc:end-->
 
-*Describe your what have you done in your project (feature engineering, models, etc.), section by section.*
-
 ## Feature Engineering
 
 ### Bedrooms
@@ -44,6 +42,12 @@ Since `Random Forest Regressor` can divide the numeric data in a unlinear way, t
 Therefore, I just let these data `passthrough`.
 
 ### RandomForestRegressor
+
+I choose RandomForestRegressor as my model.
+
+```python
+ensemble.RandomForestRegressor(n_estimators=100,max_depth=15)
+```
 
 Choose `n_estimators` as 100 to enhance the robustness of model and avoid overfitting on the training data
 
